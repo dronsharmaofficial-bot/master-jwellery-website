@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 <html class="scroll-smooth" lang="en"><head>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>LUXE | The Liquid Ethereal</title>
@@ -340,7 +341,7 @@
 <span class="manrope text-xs uppercase tracking-widest font-medium">Watches</span>
 </div>
 </div>
-<button class="w-full liquid-gradient text-on-primary py-5 rounded-full font-medium tracking-widest uppercase text-xs hover:scale-[1.02] active:scale-95 transition-transform shadow-lg shadow-primary/20">
+<button id="checkout-btn" class="w-full liquid-gradient text-on-primary py-5 rounded-full font-medium tracking-widest uppercase text-xs hover:scale-[1.02] active:scale-95 transition-transform shadow-lg shadow-primary/20">
         Checkout Now
     </button>
 </aside>
@@ -383,6 +384,41 @@
     }, { threshold: 0.1 });
 
     reveals.forEach(el => revealObserver.observe(el));
+
+    // Razorpay Integration
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var options = {
+                "key": "rzp_test_YOUR_KEY_ID", // Enter the Key ID generated from the Dashboard
+                "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "LUXE",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "handler": function (response){
+                    alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+                },
+                "prefill": {
+                    "name": "Jane Doe",
+                    "email": "jane.doe@example.com",
+                    "contact": "9999999999"
+                },
+                "notes": {
+                    "address": "LUXE Corporate Office"
+                },
+                "theme": {
+                    "color": "#006a67"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert("Payment Failed! Reason: " + response.error.description);
+            });
+            rzp1.open();
+        });
+    }
 
     // Drawer Logic
     const openCart = document.getElementById('open-cart');
