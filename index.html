@@ -153,11 +153,11 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 px-8 py-4 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-[0_20px_40px_rgba(10,186,181,0.06)] transition-all duration-500">
 <div class="flex justify-between items-center max-w-screen-2xl mx-auto">
-<div class="text-2xl font-serif tracking-tighter text-teal-600 dark:text-teal-400 cursor-pointer hover:opacity-80 transition-opacity">LUXE</div>
+<div id="brand-logo" class="text-2xl font-serif tracking-tighter text-teal-600 dark:text-teal-400 cursor-pointer hover:opacity-80 transition-opacity">LUXE</div>
 <div class="hidden md:flex items-center gap-12">
-<a class="nav-link-hover text-teal-600 dark:text-teal-400 border-b-2 border-teal-500 pb-1 noto-serif italic font-light tracking-wide text-sm" href="#">The Collection</a>
-<a class="nav-link-hover text-slate-600 dark:text-slate-400 noto-serif italic font-light tracking-wide text-sm" href="#">Heritage</a>
-<a class="nav-link-hover text-slate-600 dark:text-slate-400 noto-serif italic font-light tracking-wide text-sm" href="#">Bespoke</a>
+<a class="nav-link-hover text-teal-600 dark:text-teal-400 border-b-2 border-teal-500 pb-1 noto-serif italic font-light tracking-wide text-sm" href="#collection-section">The Collection</a>
+<a class="nav-link-hover text-slate-600 dark:text-slate-400 noto-serif italic font-light tracking-wide text-sm" href="#heritage-section">Heritage</a>
+<a class="nav-link-hover text-slate-600 dark:text-slate-400 noto-serif italic font-light tracking-wide text-sm" href="#newsletter-section">Bespoke</a>
 </div>
 <div class="flex items-center gap-6">
 <button class="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95" id="open-cart">
@@ -200,7 +200,7 @@
 </div>
 </section>
 <!-- Editorial Bento Grid -->
-<section class="py-32 px-8 max-w-screen-2xl mx-auto reveal">
+<section id="heritage-section" class="py-32 px-8 max-w-screen-2xl mx-auto reveal">
 <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[900px]">
 <!-- Main Editorial Card -->
 <div class="md:col-span-7 bg-surface-container-low rounded-3xl overflow-hidden relative group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-700">
@@ -234,7 +234,7 @@
 </div>
 </section>
 <!-- Product Gallery -->
-<section class="py-20 bg-surface-container-low">
+<section id="collection-section" class="py-20 bg-surface-container-low">
 <div class="max-w-screen-2xl mx-auto px-8">
 <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 reveal">
 <div>
@@ -295,7 +295,7 @@
 </div>
 </section>
 <!-- Newsletter / CTA -->
-<section class="py-32 bg-white flex items-center justify-center text-center px-8 reveal">
+<section id="newsletter-section" class="py-32 bg-white flex items-center justify-center text-center px-8 reveal">
 <div class="max-w-2xl">
 <span class="material-symbols-outlined text-primary-container text-5xl mb-8 animate-bounce" data-icon="diamond">diamond</span>
 <h2 class="noto-serif text-5xl font-light text-on-surface mb-8">Join the Inner Circle</h2>
@@ -545,10 +545,26 @@
         }
 
         // Text Elements
-        const textSelectors = 'h1, h2, h3, h4, p, span.block, a.nav-link-hover';
+        const textSelectors = 'h1, h2, h3, h4, p, span.block, a.nav-link-hover, #brand-logo, a.liquid-gradient, a.bg-surface-container-lowest, footer div.manrope';
         document.querySelectorAll(textSelectors).forEach(el => {
             // Ignore icon spans and button texts if they shouldn't be edited easily
             if(el.classList.contains('material-symbols-outlined') || el.closest('button')) return;
+
+            // For links, temporarily disable navigation so they can be edited without jumping
+            if (el.tagName.toLowerCase() === 'a') {
+                if (isAdminMode) {
+                    if (!el.hasAttribute('data-original-href') && el.hasAttribute('href')) {
+                        el.setAttribute('data-original-href', el.getAttribute('href'));
+                        el.removeAttribute('href');
+                    }
+                    el.style.pointerEvents = 'auto';
+                } else {
+                    if (el.hasAttribute('data-original-href')) {
+                        el.setAttribute('href', el.getAttribute('data-original-href'));
+                        el.removeAttribute('data-original-href');
+                    }
+                }
+            }
 
             el.contentEditable = isAdminMode;
             if (isAdminMode) {
