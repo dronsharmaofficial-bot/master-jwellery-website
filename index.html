@@ -163,7 +163,7 @@
 <button class="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95" id="open-cart">
 <span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
 </button>
-<button class="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">
+<button id="open-login" class="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95">
 <span class="material-symbols-outlined" data-icon="person">person</span>
 </button>
 <button class="text-slate-600 dark:text-teal-400 hover:text-primary transition-all duration-300 hover:scale-110 active:scale-95 p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-sm" id="dark-mode-toggle">
@@ -177,10 +177,11 @@
 <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-surface">
 <!-- Simulated Video Background -->
 <div class="absolute inset-0 z-0 scale-105 animate-[pulse_8s_ease-in-out_infinite]">
-<img class="w-full h-full object-cover opacity-90" data-alt="Cinematic close-up of a brilliant diamond necklace floating against a soft, fluid teal silk background with refractive light glares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHgYVvRqexniRtZrgD6ZmecJFnxO8YmhmIj-uxzje2mQ7QE-P6HJ8dqLb0r7mjBjBvdFThaNV8coeEs9FqR8sUggxRRe2iwbHFslfG9qHN4D0LDpcBnv4QTjXV4OToju0eelaRFRTnp85-67uPFlHag7LkgRrxNWukQ8ftxa7obgUUmMZZJecYG62EPIaJKQDC6DfRBSGwRsSxvrzVC0KjY_E2z-xeG7XvjGV4wRsLAEZcXzhcwySdCrQwhHn_LhpgRrCR8JiMKIs"/>
-<div class="absolute inset-0 hero-video-overlay"></div>
+<img class="w-full h-full object-cover opacity-90 admin-bg-image" data-alt="Cinematic close-up of a brilliant diamond necklace floating against a soft, fluid teal silk background with refractive light glares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHgYVvRqexniRtZrgD6ZmecJFnxO8YmhmIj-uxzje2mQ7QE-P6HJ8dqLb0r7mjBjBvdFThaNV8coeEs9FqR8sUggxRRe2iwbHFslfG9qHN4D0LDpcBnv4QTjXV4OToju0eelaRFRTnp85-67uPFlHag7LkgRrxNWukQ8ftxa7obgUUmMZZJecYG62EPIaJKQDC6DfRBSGwRsSxvrzVC0KjY_E2z-xeG7XvjGV4wRsLAEZcXzhcwySdCrQwhHn_LhpgRrCR8JiMKIs"/>
+<div class="absolute inset-0 hero-video-overlay pointer-events-none"></div>
 </div>
-<div class="relative z-10 text-center px-6 max-w-4xl">
+<div class="relative z-10 text-center px-6 max-w-4xl pointer-events-none">
+    <div class="pointer-events-auto inline-block">
 <span class="block text-primary tracking-[0.3em] uppercase text-xs mb-6 font-medium manrope opacity-0 animate-[fadeInUp_1s_ease_0.2s_forwards]">The New Signature Series</span>
 <h1 class="noto-serif text-6xl md:text-8xl font-light text-on-surface tracking-tight mb-8 opacity-0 animate-[fadeInUp_1s_ease_0.4s_forwards]">
                 The Liquid <i class="font-light italic">Ethereal</i>
@@ -189,14 +190,15 @@
                 A dialogue between light and form. Pieces designed to mimic the effortless grace of water, captured in platinum and rare gemstones.
             </p>
 <div class="flex flex-col sm:flex-row items-center justify-center gap-6 opacity-0 animate-[fadeInUp_1s_ease_0.8s_forwards]">
-<button class="liquid-gradient text-on-primary px-10 py-5 rounded-full font-medium tracking-wide shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-500 group relative overflow-hidden">
+<a href="#collection-section" class="liquid-gradient text-on-primary px-10 py-5 rounded-full font-medium tracking-wide shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all duration-500 group relative overflow-hidden inline-block text-center">
 <span class="relative z-10">Shop the Collection</span>
 <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-</button>
-<button class="bg-surface-container-lowest border border-outline-variant/30 text-primary px-10 py-5 rounded-full font-medium tracking-wide hover:bg-surface-container-low hover:border-primary/40 transition-all duration-300">
+</a>
+<a href="#heritage-section" class="bg-surface-container-lowest border border-outline-variant/30 text-primary px-10 py-5 rounded-full font-medium tracking-wide hover:bg-surface-container-low hover:border-primary/40 transition-all duration-300 inline-block text-center">
                     View Lookbook
-                </button>
+                </a>
 </div>
+    </div>
 </div>
 </section>
 <!-- Editorial Bento Grid -->
@@ -291,6 +293,13 @@
 <p class="manrope text-sm text-outline mb-4">White Gold & Emerald Cut</p>
 <p class="manrope font-semibold text-primary">$15,200</p>
 </div>
+<!-- Add Product Button (Hidden by default, shown in admin mode) -->
+<div id="add-product-container" class="hidden flex justify-center items-center w-full h-full min-h-[300px] border-2 border-dashed border-primary/30 rounded-3xl hover:bg-primary/5 transition-colors">
+    <button id="add-product-btn" class="text-primary flex flex-col items-center gap-2 p-8">
+        <span class="material-symbols-outlined text-4xl">add_circle</span>
+        <span class="font-semibold tracking-widest uppercase text-sm">Add Product</span>
+    </button>
+</div>
 </div>
 </div>
 </section>
@@ -346,7 +355,79 @@
     </button>
 </aside>
 <!-- Backdrop overlay for drawer -->
-<div class="fixed inset-0 bg-black/5 backdrop-blur-0 z-[99] pointer-events-none transition-all duration-700" id="drawer-overlay"></div>
+<div class="fixed inset-0 bg-black/5 backdrop-blur-0 z-[99] pointer-events-none transition-all duration-700 opacity-0" id="drawer-overlay"></div>
+
+<!-- Product Detail Modal -->
+<div id="product-modal" class="fixed inset-0 z-[160] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md" id="product-backdrop"></div>
+    <div class="relative bg-surface-container-lowest dark:bg-slate-900 w-full max-w-5xl h-[90vh] md:h-auto max-h-[90vh] md:rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-500" id="product-content">
+        <button id="close-product" class="absolute top-4 right-4 z-10 p-2 bg-white/50 backdrop-blur rounded-full text-slate-800 hover:text-primary transition-colors shadow">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <!-- Product Image -->
+        <div class="w-full md:w-1/2 h-64 md:h-auto bg-surface-container-low relative">
+            <img id="modal-product-img" src="" class="w-full h-full object-cover" alt="Product Image">
+        </div>
+        <!-- Product Info -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto flex flex-col">
+            <p id="modal-product-subtitle" class="manrope text-sm text-outline tracking-widest uppercase mb-2">Collection</p>
+            <h2 id="modal-product-title" class="noto-serif text-4xl font-light text-on-surface mb-4">Product Name</h2>
+            <p id="modal-product-price" class="manrope text-2xl font-semibold text-primary mb-6">$0</p>
+
+            <div class="mb-8">
+                <h4 class="manrope text-sm font-semibold mb-2">Description</h4>
+                <p id="modal-product-desc" class="manrope text-sm text-outline leading-relaxed">
+                    An exquisite piece handcrafted with precision. Designed to capture the essence of liquid light, offering unparalleled elegance and sophistication for the modern collector.
+                </p>
+            </div>
+
+            <div class="mt-auto flex flex-col gap-4">
+                <button class="w-full bg-surface-container-low border border-outline-variant/30 text-on-surface py-4 rounded-xl font-medium tracking-widest uppercase text-xs hover:bg-surface-container-high transition-colors">
+                    Add to Cart
+                </button>
+                <button id="modal-buy-now" class="w-full liquid-gradient text-on-primary py-4 rounded-xl font-medium tracking-widest uppercase text-xs hover:scale-[1.02] active:scale-95 transition-transform shadow-lg shadow-primary/20">
+                    Buy Now
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div id="login-modal" class="fixed inset-0 z-[150] flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-500">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" id="login-backdrop"></div>
+    <div class="relative bg-surface-container-lowest dark:bg-slate-900 w-full max-w-md p-8 rounded-3xl shadow-2xl transform scale-95 transition-transform duration-500" id="login-content">
+        <button id="close-login" class="absolute top-4 right-4 p-2 text-outline hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <h3 class="noto-serif text-3xl font-light text-on-surface mb-2">Welcome Back</h3>
+        <p class="manrope text-sm text-outline mb-8">Enter your details to access your curated collection.</p>
+
+        <form class="flex flex-col gap-4">
+            <div>
+                <label class="manrope text-xs tracking-widest uppercase text-outline font-semibold mb-2 block">Email</label>
+                <input type="email" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 manrope text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="your@email.com">
+            </div>
+            <div>
+                <label class="manrope text-xs tracking-widest uppercase text-outline font-semibold mb-2 block">Password</label>
+                <input type="password" class="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 manrope text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" placeholder="••••••••">
+            </div>
+            <div class="flex justify-between items-center mt-2 mb-6">
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" class="rounded text-primary focus:ring-primary bg-surface-container-low border-outline-variant/30">
+                    <span class="manrope text-xs text-outline">Remember me</span>
+                </label>
+                <a href="#" class="manrope text-xs text-primary hover:underline">Forgot Password?</a>
+            </div>
+            <button type="button" class="liquid-gradient text-on-primary py-4 rounded-xl font-medium tracking-widest uppercase text-xs hover:scale-[1.02] active:scale-95 transition-transform shadow-lg shadow-primary/20">
+                Sign In
+            </button>
+        </form>
+        <p class="manrope text-xs text-center text-outline mt-6">
+            New to LUXE? <a href="#" class="text-primary font-semibold hover:underline">Create an Account</a>
+        </p>
+    </div>
+</div>
 
 <!-- Admin Mode Toggle Button -->
 <div class="fixed bottom-4 left-4 z-[200]">
@@ -429,13 +510,13 @@
     const toggleDrawer = (isOpen) => {
         if (isOpen) {
             drawer.classList.add('drawer-open');
-            overlay.classList.add('backdrop-blur-md', 'pointer-events-auto');
-            overlay.classList.remove('pointer-events-none');
+            overlay.classList.add('backdrop-blur-md', 'pointer-events-auto', 'opacity-100');
+            overlay.classList.remove('pointer-events-none', 'opacity-0');
             document.body.style.overflow = 'hidden';
         } else {
             drawer.classList.remove('drawer-open');
-            overlay.classList.remove('backdrop-blur-md', 'pointer-events-auto');
-            overlay.classList.add('pointer-events-none');
+            overlay.classList.remove('backdrop-blur-md', 'pointer-events-auto', 'opacity-100');
+            overlay.classList.add('pointer-events-none', 'opacity-0');
             document.body.style.overflow = '';
         }
     };
@@ -443,6 +524,92 @@
     openCart.addEventListener('click', () => toggleDrawer(true));
     closeCart.addEventListener('click', () => toggleDrawer(false));
     overlay.addEventListener('click', () => toggleDrawer(false));
+
+    // Product Modal Logic
+    const productModal = document.getElementById('product-modal');
+    const productBackdrop = document.getElementById('product-backdrop');
+    const productContent = document.getElementById('product-content');
+    const closeProductBtn = document.getElementById('close-product');
+    const modalImg = document.getElementById('modal-product-img');
+    const modalTitle = document.getElementById('modal-product-title');
+    const modalSubtitle = document.getElementById('modal-product-subtitle');
+    const modalPrice = document.getElementById('modal-product-price');
+    const modalBuyNow = document.getElementById('modal-buy-now');
+
+    const toggleProductModal = (isOpen, card = null) => {
+        if (isOpen && card) {
+            // Populate data from card
+            const img = card.querySelector('img').src;
+            const title = card.querySelector('h4').textContent;
+            const subtitle = card.querySelector('p.text-sm').textContent;
+            const price = card.querySelector('p.font-semibold').textContent;
+
+            modalImg.src = img;
+            modalTitle.textContent = title;
+            modalSubtitle.textContent = subtitle;
+            modalPrice.textContent = price;
+
+            productModal.classList.remove('pointer-events-none', 'opacity-0');
+            productContent.classList.remove('scale-95');
+            productContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+
+            // Wire Razorpay to Buy Now
+            modalBuyNow.onclick = () => {
+                if(checkoutBtn) checkoutBtn.click();
+            };
+        } else {
+            productModal.classList.add('pointer-events-none', 'opacity-0');
+            productContent.classList.add('scale-95');
+            productContent.classList.remove('scale-100');
+            document.body.style.overflow = '';
+        }
+    };
+
+    closeProductBtn.addEventListener('click', () => toggleProductModal(false));
+    productBackdrop.addEventListener('click', () => toggleProductModal(false));
+
+    // Attach click listeners to product cards
+    function attachProductClickListeners() {
+        document.querySelectorAll('.product-card-glow').forEach(card => {
+            // Remove old listener to avoid duplicates if called multiple times
+            card.removeEventListener('click', handleProductClick);
+            card.addEventListener('click', handleProductClick);
+        });
+    }
+
+    function handleProductClick(e) {
+        if (isAdminMode) return; // Don't open modal if editing
+        const card = e.currentTarget;
+        toggleProductModal(true, card);
+    }
+
+    attachProductClickListeners();
+
+    // Login Modal Logic
+    const openLoginBtn = document.getElementById('open-login');
+    const closeLoginBtn = document.getElementById('close-login');
+    const loginModal = document.getElementById('login-modal');
+    const loginBackdrop = document.getElementById('login-backdrop');
+    const loginContent = document.getElementById('login-content');
+
+    const toggleLogin = (isOpen) => {
+        if (isOpen) {
+            loginModal.classList.remove('pointer-events-none', 'opacity-0');
+            loginContent.classList.remove('scale-95');
+            loginContent.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        } else {
+            loginModal.classList.add('pointer-events-none', 'opacity-0');
+            loginContent.classList.add('scale-95');
+            loginContent.classList.remove('scale-100');
+            document.body.style.overflow = '';
+        }
+    };
+
+    openLoginBtn.addEventListener('click', () => toggleLogin(true));
+    closeLoginBtn.addEventListener('click', () => toggleLogin(false));
+    loginBackdrop.addEventListener('click', () => toggleLogin(false));
 
     // Custom fadeInUp animation for hero
     const style = document.createElement('style');
@@ -515,8 +682,42 @@
 
     // Admin Mode Implementation
     const adminToggleBtn = document.getElementById('admin-mode-toggle');
+    const addProductContainer = document.getElementById('add-product-container');
+    const addProductBtn = document.getElementById('add-product-btn');
     let isAdminMode = false;
     let sortableInstance = null;
+
+    if (addProductBtn) {
+        addProductBtn.addEventListener('click', () => {
+            const imgUrl = prompt("Enter product image URL:");
+            if (!imgUrl) return;
+            const title = prompt("Enter product name:", "New Product");
+            const price = prompt("Enter product price:", "$1,000");
+            const subtitle = prompt("Enter product subtitle:", "Collection Name");
+
+            const newCard = document.createElement('div');
+            newCard.className = "product-card-glow bg-surface-container-lowest rounded-3xl p-6 group cursor-pointer reveal visible";
+            newCard.innerHTML = `
+                <div class="aspect-square rounded-2xl overflow-hidden mb-8 bg-surface-container-low relative">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${imgUrl}" alt="${title}">
+                    <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors"></div>
+                </div>
+                <h4 class="manrope font-medium text-on-surface mb-1 group-hover:text-primary transition-colors">${title}</h4>
+                <p class="manrope text-sm text-outline mb-4">${subtitle}</p>
+                <p class="manrope font-semibold text-primary">${price}</p>
+            `;
+
+            const gallery = document.getElementById('product-gallery');
+            // Insert before the add product container
+            gallery.insertBefore(newCard, addProductContainer);
+
+            // Re-apply admin mode styles to new elements if active
+            if (isAdminMode) {
+                toggleAdminMode(true); // Re-run to catch new elements
+            }
+            attachProductClickListeners(); // Ensure new card can open modal
+        });
+    }
 
     function handleImageClick(e) {
         if (!isAdminMode) return;
@@ -533,15 +734,17 @@
     function toggleAdminMode() {
         isAdminMode = !isAdminMode;
 
-        // Toggle button appearance
+        // Toggle button appearance & add product button visibility
         if (isAdminMode) {
             adminToggleBtn.classList.remove('bg-primary');
             adminToggleBtn.classList.add('bg-red-500');
             adminToggleBtn.querySelector('span:last-child').textContent = "Exit Admin";
+            if(addProductContainer) addProductContainer.classList.remove('hidden');
         } else {
             adminToggleBtn.classList.remove('bg-red-500');
             adminToggleBtn.classList.add('bg-primary');
             adminToggleBtn.querySelector('span:last-child').textContent = "Admin Mode";
+            if(addProductContainer) addProductContainer.classList.add('hidden');
         }
 
         // Text Elements
@@ -579,9 +782,19 @@
             if (isAdminMode) {
                 img.classList.add('admin-image-editable');
                 img.addEventListener('click', handleImageClick);
+                if(img.classList.contains('admin-bg-image')) {
+                    img.parentElement.style.zIndex = '50';
+                    const heroText = document.querySelector('.relative.z-10.text-center');
+                    if (heroText) heroText.style.zIndex = '60';
+                }
             } else {
                 img.classList.remove('admin-image-editable');
                 img.removeEventListener('click', handleImageClick);
+                if(img.classList.contains('admin-bg-image')) {
+                    img.parentElement.style.zIndex = '0';
+                    const heroText = document.querySelector('.relative.z-10.text-center');
+                    if (heroText) heroText.style.zIndex = '10';
+                }
             }
         });
 
