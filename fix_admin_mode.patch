@@ -1,0 +1,58 @@
+--- index.html
++++ index.html
+@@ -628,47 +628,49 @@
+
+     // Admin Mode Implementation
+     const adminToggleBtn = document.getElementById('admin-mode-toggle');
+     let isAdminMode = false;
+     let sortableInstance = null;
+
+     function handleImageClick(e) {
+         if (!isAdminMode) return;
+         e.preventDefault();
+-        const img = e.currentTarget;
+-        const newUrl = prompt("Enter new image URL:", img.src);
+-        if (newUrl && newUrl.trim() !== "") {
+-            img.src = newUrl;
+-        }
++        setTimeout(() => {
++            const img = e.target;
++            const newUrl = prompt("Enter new image URL:", img.src);
++            if (newUrl && newUrl.trim() !== "") {
++                img.src = newUrl;
++            }
++        }, 10);
+     }
+
+     function toggleAdminMode() {
+         isAdminMode = !isAdminMode;
+
+         // Toggle button appearance
+         if (isAdminMode) {
+             adminToggleBtn.classList.remove('bg-primary');
+             adminToggleBtn.classList.add('bg-red-500');
+             adminToggleBtn.querySelector('span:last-child').textContent = "Exit Admin";
+         } else {
+             adminToggleBtn.classList.remove('bg-red-500');
+             adminToggleBtn.classList.add('bg-primary');
+             adminToggleBtn.querySelector('span:last-child').textContent = "Admin Mode";
+         }
+
+         // Text Elements
+         const textSelectors = 'h1, h2, h3, h4, p, span.block, a.nav-link-hover';
+         document.querySelectorAll(textSelectors).forEach(el => {
+             // Ignore icon spans and button texts if they shouldn't be edited easily
+-            if(el.classList.contains('material-symbols-outlined') || el.closest('#admin-mode-toggle')) return;
++            if(el.classList.contains('material-symbols-outlined') || el.closest('button')) return;
+
+             el.contentEditable = isAdminMode;
+             if (isAdminMode) {
+                 el.classList.add('admin-editable');
+             } else {
+                 el.classList.remove('admin-editable');
+             }
+         });
+
+         // Image Elements
+         document.querySelectorAll('img').forEach(img => {
+             if (isAdminMode) {
